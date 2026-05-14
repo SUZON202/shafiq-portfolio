@@ -1,17 +1,18 @@
+import React from 'react';
 import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2"; 
 
 const Notification = () => {
-    // ১. ডাটা নিয়ে আসার সময় চাবি (Token) পাঠানো হচ্ছে
+    // ১. ডাটা নিয়ে আসার সময় চাবি (Token) পাঠানো হচ্ছে
     const { data: messages = [], refetch, isLoading } = useQuery({
         queryKey: ['messages'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/messages', {
+            const res = await fetch('https://shafiq-portfolio-server.vercel.app/messages', {
                 headers: {
                     authorization: `Bearer ${localStorage.getItem('access-token')}`
                 }
             });
-            // যদি টোকেন না থাকে বা ভুল হয়, তবে এটি এরর হ্যান্ডেল করবে
+            // যদি টোকেন না থাকে বা ভুল হয়, তবে এটি এরর হ্যান্ডেল করবে
             if (!res.ok) {
                 throw new Error('Unauthorized Access');
             }
@@ -19,7 +20,7 @@ const Notification = () => {
         }
     });
 
-    // ২. মেসেজ ডিলিট করার সময় চাবি পাঠানো হচ্ছে
+    // ২. মেসেজ ডিলিট করার সময় চাবি পাঠানো হচ্ছে
     const handleDelete = (id) => {
         Swal.fire({
             title: 'Delete Message?',
@@ -33,7 +34,7 @@ const Notification = () => {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`http://localhost:5000/messages/${id}`, { 
+                fetch(`https://shafiq-portfolio-server.vercel.app/messages/${id}`, { 
                     method: 'DELETE',
                     headers: {
                         authorization: `Bearer ${localStorage.getItem('access-token')}`
@@ -59,7 +60,7 @@ const Notification = () => {
         });
     };
 
-    if (isLoading) return <div style={{ color: "white", textAlign: "center", marginTop: "50px" }}>Loading Messages...</div>;
+    if (isLoading) return <div style={{ color: "white", textAlign: "center", marginTop: "50px" }}><span className="loading loading-spinner text-primary"></span> Loading Messages...</div>;
 
     return (
         <>
@@ -115,4 +116,4 @@ const Notification = () => {
     );
 };
 
-export default Notification;
+export default Notification; // <-- এখানেই স্পেসটা ঠিক করে দিয়েছি

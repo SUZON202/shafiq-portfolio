@@ -26,7 +26,7 @@ const handleRegister = (e) => {
                 });
 
                 // ২. ডাটাবেসে পাঠানোর কাজটা পেছনে চলতে থাকবে, পপ-আপ আটকাবে না
-                fetch('http://localhost:5000/users', {
+                fetch('https://shafiq-portfolio-server.vercel.app/users', {
                     method: 'POST',
                     headers: { 'content-type': 'application/json' },
                     body: JSON.stringify(newUser)
@@ -90,7 +90,7 @@ const newUser = { name, email, role: userRole };
                 });
 
                 // ২. ডাটাবেসে পাঠানোর কাজটা পেছনে চলতে থাকবে, পপ-আপ আটকাবে না
-                fetch('http://localhost:5000/users', {
+                fetch('https://shafiq-portfolio-server.vercel.app/users', {
                     method: 'POST',
                     headers: { 'content-type': 'application/json' },
                     body: JSON.stringify(newUser)

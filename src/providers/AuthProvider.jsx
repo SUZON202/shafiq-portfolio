@@ -37,7 +37,7 @@ const AuthProvider = ({ children }) => {
                 // ইউজার লগইন করলে ব্যাকএন্ড থেকে টোকেন চাইবে
                 const userInfo = { email: currentUser.email };
                 
-                fetch('http://localhost:5000/jwt', {
+                fetch('https://shafiq-portfolio-server.vercel.app/jwt', {
                     method: 'POST',
                     headers: { 'content-type': 'application/json' },
                     body: JSON.stringify(userInfo)

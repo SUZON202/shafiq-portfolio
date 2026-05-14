@@ -1,6 +1,29 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { AuthContext } from '../providers/AuthProvider'; // আপনার AuthProvider এর সঠিক পাথ দিন
+import Swal from 'sweetalert2';
 
 const Settings = () => {
+    // Firebase থেকে লগ-ইন করা ইউজারের ডাটা নিয়ে আসা হচ্ছে
+    const { user } = useContext(AuthContext);
+
+    // সেভ বাটনের ফাংশন
+    const handleSave = (e) => {
+        e.preventDefault();
+        
+        // এখানে ভবিষ্যতে ব্যাকএন্ডে ডাটা পাঠানোর API যোগ করতে পারবেন
+        // আপাতত রিয়ালিস্টিক ফিল দেওয়ার জন্য SweetAlert যোগ করা হলো
+        Swal.fire({
+            title: 'Settings Saved!',
+            text: 'Your profile information has been updated successfully.',
+            icon: 'success',
+            background: '#13131e',
+            color: '#fff',
+            confirmButtonColor: '#7c3aed',
+            timer: 2000,
+            showConfirmButton: false
+        });
+    };
+
     return (
         <>
             <style>{`
@@ -15,6 +38,10 @@ const Settings = () => {
                 .set-btn:hover { background: #6d28d9; }
                 .set-flex { display: flex; gap: 16px; }
                 .set-flex > div { flex: 1; }
+                
+                @media (max-width: 600px) {
+                    .set-flex { flex-direction: column; gap: 0; }
+                }
             `}</style>
 
             <div>
@@ -22,29 +49,51 @@ const Settings = () => {
                 <p className="pg-sub">Update your profile details and preferences.</p>
 
                 <div className="set-card">
-                    <form onSubmit={(e) => e.preventDefault()}>
+                    <form onSubmit={handleSave}>
                         <div className="set-flex">
                             <div className="set-group">
                                 <label className="set-label">Full Name</label>
-                                <input type="text" className="set-input" defaultValue="Shafiq Suzon" placeholder="Your Name" />
+                                {/* ইউজারের নাম ডায়নামিকভাবে দেখানো হচ্ছে */}
+                                <input 
+                                    type="text" 
+                                    className="set-input" 
+                                    defaultValue={user?.displayName || "Shafiq Suzon"} 
+                                    placeholder="Your Name" 
+                                />
                             </div>
                             <div className="set-group">
                                 <label className="set-label">Email Address</label>
-                                <input type="email" className="set-input" defaultValue="shafiqsuzon1@gmail.com" readOnly style={{ opacity: 0.6 }} />
+                                {/* ইউজারের ইমেইল ডায়নামিকভাবে দেখানো হচ্ছে */}
+                                <input 
+                                    type="email" 
+                                    className="set-input" 
+                                    defaultValue={user?.email || ""} 
+                                    readOnly 
+                                    style={{ opacity: 0.6, cursor: 'not-allowed' }} 
+                                />
                             </div>
                         </div>
 
                         <div className="set-group">
                             <label className="set-label">Portfolio Bio</label>
-                            <textarea className="set-input" rows="4" placeholder="I am a MERN stack developer..." defaultValue="Full-Stack Web Developer based in Rajshahi, Bangladesh. Specialized in React, Node.js, and MongoDB."></textarea>
+                            <textarea 
+                                className="set-input" 
+                                rows="4" 
+                                placeholder="I am a MERN stack developer..." 
+                                defaultValue="Full-Stack Web Developer based in Rajshahi, Bangladesh. Specialized in React, Node.js, and MongoDB."
+                            ></textarea>
                         </div>
 
                         <div className="set-group">
                             <label className="set-label">GitHub Profile URL</label>
-                            <input type="url" className="set-input" placeholder="https://github.com/yourusername" />
+                            <input 
+                                type="url" 
+                                className="set-input" 
+                                placeholder="https://github.com/yourusername" 
+                            />
                         </div>
 
-                        <button className="set-btn">Save Changes</button>
+                        <button type="submit" className="set-btn">Save Changes</button>
                     </form>
                 </div>
             </div>

@@ -6,7 +6,7 @@ const ManageProjects = () => {
     const { data: projects = [], refetch } = useQuery({
         queryKey: ['projects'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/projects');
+            const res = await fetch('https://shafiq-portfolio-server.vercel.app/projects');
             return res.json();
         }
     });
@@ -25,7 +25,7 @@ const ManageProjects = () => {
             color: '#fff'
         }).then(async (result) => {
             if (result.isConfirmed) {
-                const res = await fetch(`http://localhost:5000/projects/${id}`, {
+                const res = await fetch(`https://shafiq-portfolio-server.vercel.app/projects/${id}`, {
                     method: 'DELETE',
                     headers: {
                         authorization: `Bearer ${localStorage.getItem('access-token')}`

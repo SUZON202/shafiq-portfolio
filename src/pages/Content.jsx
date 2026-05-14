@@ -10,7 +10,7 @@ const Content = () => {
     const { data: projects = [], refetch, isLoading } = useQuery({
         queryKey: ['projects'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/projects');
+            const res = await fetch('https://shafiq-portfolio-server.vercel.app/projects');
             return res.json();
         }
     });
@@ -27,7 +27,7 @@ const Content = () => {
 
         const newProject = { title, description, liveLink, githubLink, image };
 
-        fetch('http://localhost:5000/projects', {
+        fetch('https://shafiq-portfolio-server.vercel.app/projects', {
             method: 'POST',
             headers: { 'content-type': 'application/json' },
             body: JSON.stringify(newProject)
@@ -66,7 +66,7 @@ const Content = () => {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`http://localhost:5000/projects/${id}`, {
+                fetch(`https://shafiq-portfolio-server.vercel.app/projects/${id}`, {
                     method: 'DELETE'
                 })
                 .then(res => res.json())

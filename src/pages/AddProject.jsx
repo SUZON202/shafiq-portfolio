@@ -18,7 +18,7 @@ const AddProject = () => {
         };
 
         // ব্যাকএন্ডে ডাটা পাঠানো (টোকেনসহ)
-        const res = await fetch('http://localhost:5000/projects', {
+        const res = await fetch('https://shafiq-portfolio-server.vercel.app/projects', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',

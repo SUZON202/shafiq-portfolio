@@ -9,7 +9,8 @@ const useAdmin = () => {
         queryKey: [user?.email, 'isAdmin'],
         enabled: !loading && !!user?.email,
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/users/admin/${user?.email}`, {
+            // এখানে Vercel লিংকের বদলে localhost:5000 দেওয়া হয়েছে
+            const res = await fetch(`https://shafiq-portfolio-server.vercel.app/users/admin/${user?.email}`, {
                 headers: {
                     authorization: `Bearer ${localStorage.getItem('access-token')}`
                 }

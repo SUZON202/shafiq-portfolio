@@ -145,7 +145,7 @@ export default function ContactSection() {
         message: form.message
     };
 
-    fetch('http://localhost:5000/messages', {
+    fetch('https://shafiq-portfolio-server.vercel.app/messages', {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify(messageData)

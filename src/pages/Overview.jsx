@@ -6,7 +6,7 @@ const Overview = () => {
     const { data: stats = {}, isLoading } = useQuery({
         queryKey: ['admin-stats'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/admin-stats');
+            const res = await fetch('https://shafiq-portfolio-server.vercel.app/admin-stats');
             return res.json();
         }
     });

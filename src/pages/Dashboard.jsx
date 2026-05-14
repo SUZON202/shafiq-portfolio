@@ -60,7 +60,7 @@ const Dashboard = () => {
     const { data: stats = {} } = useQuery({
         queryKey: ['admin-stats'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/admin-stats', {
+            const res = await fetch('https://shafiq-portfolio-server.vercel.app/admin-stats', {
                 headers: {
                     authorization: `Bearer ${localStorage.getItem('access-token')}`
                 }

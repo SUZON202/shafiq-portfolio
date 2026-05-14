@@ -114,7 +114,7 @@ export default function HomeSection() {
   const { data: projects = [], isLoading } = useQuery({
     queryKey: ['public-projects'],
     queryFn: async () => {
-      const res = await fetch('http://localhost:5000/projects');
+      const res = await fetch('https://shafiq-portfolio-server.vercel.app/projects');
       return res.json();
     }
   });
